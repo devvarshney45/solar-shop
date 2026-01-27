@@ -10,15 +10,15 @@ export default function HeroSlider() {
   ];
 
   return (
-    <Swiper
-      modules={[Autoplay]}
-      autoplay={{ delay: 3000 }}
-      loop={true}
-      className="h-[300px] md:h-[450px]"
-    >
+   <Swiper
+  modules={[Autoplay]}
+  autoplay={{ delay: 3000 }}
+  loop={true}
+  className="w-full overflow-hidden h-[300px] md:h-[450px]"
+>
       {images.map((img,i) => (
         <SwiperSlide key={i}>
-          <img src={img} className="w-full h-full object-cover" />
+          <img src={img} className="w-full h-full object-coverblock" />
         </SwiperSlide>
       ))}
     </Swiper>
