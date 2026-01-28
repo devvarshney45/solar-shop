@@ -3,7 +3,8 @@ import dotenv from "dotenv"
 import cors from "cors";
 import connectDB from "./config/db.js";
 import productRoutes from "./routes/productRoutes.js";
-
+import authRoutes from "./routes/authRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js"
 dotenv.config()
 connectDB();
 const app=express();
@@ -22,5 +23,6 @@ app.listen(PORT,()=>{
     console.log(`server runnung on port ${PORT}`);
 
 });
-
 app.use("/api/products",productRoutes);
+app.use("/api/auth",authRoutes);
+app.use("/api/orders",orderRoutes);
