@@ -13,4 +13,14 @@ router.post("/",async (req,res)=>{
     res.json("Products added");
 });
 
+router.put("/:id",async (res,req)=>{
+    await Product.findByIdAndUpdate(req.params.id,req.body);
+    res.json("Product updated");
+});
+
+router.delete("/:id",async (req,res)=>{
+    await Product.findByIdAndDelete(req.params.id);
+    res.json("Product Deleted");
+} );
+
 export default router;
