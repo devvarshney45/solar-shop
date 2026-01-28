@@ -1,52 +1,78 @@
 import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
 import { CartContext } from "../context/CartContext";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Checkout() {
-  const { user } = useContext(AuthContext);
-  const { cart } = useContext(CartContext);
+  const { cart, clearCart } = useContext(CartContext);
+  const navigate = useNavigate();
 
-  // Agar login nahi → login page
-  if (!user) {
-    return <Navigate to="/login" />;
+  // Total price with quantity
+  const total = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
+  // Place COD Order
+  async function placeOrder() {
+    const token = localStorage.getItem("token");
+
+    const res = await fetch("http://localhost:5000/api/orders", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token
+      },
+      body: JSON.stringify({
+        items: cart,
+        totalAmount: total,
+        paymentMethod: "COD"
+      })
+    });
+
+    if(res.ok){
+      alert("✅ Order Placed Successfully! Pay at Shop.");
+      clearCart();
+      navigate("/");
+    } else {
+      alert("❌ Order Failed");
+    }
   }
 
-  const total = cart.reduce((sum, item) => sum + item.price, 0);
-
   return (
-    <div className="bg-[#081426] min-h-screen text-white p-10">
-      
+    <div className="bg-[#081426] min-h-screen text-white p-8">
+
       <h1 className="text-3xl font-bold mb-6">Checkout</h1>
 
-      <p className="mb-4 text-sm text-gray-300">
-        Logged in as: <span className="text-blue-400">{user.email}</span>
-      </p>
-
-      {/* Order Items */}
-      <div className="bg-[#0f1f33] p-6 rounded-lg mb-6">
-        <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
-
-        {cart.map(item => (
-          <div key={item.id} className="flex justify-between mb-2">
-            <span>{item.name}</span>
-            <span className="text-green-400">₹ {item.price}</span>
+      {/* Cart Items Summary */}
+      <div className="bg-[#0f1f33] p-5 rounded">
+        {cart.map((item,i)=>(
+          <div 
+            key={i} 
+            className="flex justify-between border-b border-gray-600 py-2"
+          >
+            <div>
+              <p className="font-semibold">{item.name}</p>
+              <p className="text-sm text-gray-400">
+                {item.brand} × {item.quantity}
+              </p>
+            </div>
+            <p>₹ {item.price * item.quantity}</p>
           </div>
         ))}
 
-        <hr className="my-4 border-gray-600" />
+        {/* Total */}
+        <h2 className="mt-4 text-xl font-bold">
+          Total: ₹ {total}
+        </h2>
 
-        <div className="flex justify-between font-bold text-lg">
-          <span>Total</span>
-          <span className="text-green-400">₹ {total}</span>
-        </div>
+        {/* COD Button */}
+        <button 
+          onClick={placeOrder}
+          className="mt-6 bg-green-600 px-6 py-3 rounded w-full"
+        >
+          Place Order (Pay at Shop)
+        </button>
       </div>
-
-      {/* Place Order Button */}
-      <button className="bg-blue-600 px-8 py-3 rounded hover:bg-blue-700 transition">
-        Place Order
-      </button>
-
     </div>
   );
 }

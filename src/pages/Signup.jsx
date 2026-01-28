@@ -3,8 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 import { AuthContext } from "../context/AuthContext";
 
-export default function Login() {
-  const [form, setForm] = useState({ email:"", password:"" });
+export default function Signup() {
+  const [form, setForm] = useState({ name:"", email:"", password:"" });
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
 
@@ -12,10 +12,11 @@ export default function Login() {
     setForm({...form, [e.target.name]: e.target.value});
   }
 
+  // Normal Signup
   async function handleSubmit(e){
     e.preventDefault();
 
-    const res = await fetch("http://localhost:5000/api/auth/login",{
+    const res = await fetch("http://localhost:5000/api/auth/signup",{
       method:"POST",
       headers:{ "Content-Type":"application/json" },
       body: JSON.stringify(form)
@@ -24,15 +25,14 @@ export default function Login() {
     const data = await res.json();
 
     if(res.ok){
-      login(data);   // 🔥 Context login
-
-      if(data.user.isAdmin) navigate("/admin");
-      else navigate("/");
+      login(data);       // 🔥 Context login
+      navigate("/");
     } else {
-      alert(data.message || "Login failed");
+      alert(data.message || "Signup failed");
     }
   }
 
+  // Google Signup/Login
   async function handleGoogleSuccess(response){
     const res = await fetch("http://localhost:5000/api/auth/google",{
       method:"POST",
@@ -43,12 +43,10 @@ export default function Login() {
     const data = await res.json();
 
     if(res.ok){
-      login(data);   // 🔥 Context login
-
-      if(data.user.isAdmin) navigate("/admin");
-      else navigate("/");
+      login(data);       // 🔥 Context login
+      navigate("/");
     } else {
-      alert("Google Login Failed");
+      alert("Google Signup Failed");
     }
   }
 
@@ -58,7 +56,15 @@ export default function Login() {
       <form onSubmit={handleSubmit}
         className="bg-[#0f1f33] p-8 rounded w-96">
 
-        <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">Signup</h2>
+
+        <input 
+          name="name"
+          placeholder="Name"
+          onChange={handleChange}
+          className="w-full p-2 mb-3 rounded bg-[#081426]"
+          required
+        />
 
         <input 
           name="email"
@@ -78,19 +84,19 @@ export default function Login() {
         />
 
         <button className="bg-green-600 w-full py-2 rounded mb-4">
-          Login
+          Create Account
         </button>
 
         <div className="flex justify-center">
           <GoogleLogin
             onSuccess={handleGoogleSuccess}
-            onError={()=> alert("Google Login Failed")}
+            onError={()=> alert("Google Signup Failed")}
           />
         </div>
 
         <p className="text-sm text-center mt-4">
-          New user?
-          <Link to="/signup" className="text-blue-400"> Signup</Link>
+          Already user?
+          <Link to="/login" className="text-blue-400"> Login</Link>
         </p>
       </form>
     </div>
