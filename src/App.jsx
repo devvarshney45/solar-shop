@@ -4,6 +4,7 @@ import Products from "./pages/Products";
 import Cart from "./pages/Cart";
 import Login from "./pages/Login";
 import Checkout from "./pages/Checkout";
+import Admin from "./pages/Admin";
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/admin" element={<Admin />} />
 
       </Routes>
     </BrowserRouter>

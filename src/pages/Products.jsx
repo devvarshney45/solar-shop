@@ -1,16 +1,24 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import products from "../data/products";
 import ProductCard from "../components/ProductCard";
 
 export default function Products() {
 
-  const { company } = useParams();   // 👈 URL se brand
+  const { company } = useParams();   // URL se brand
 
+  const [products, setProducts] = useState([]);  // 👈 Backend data
   const [search, setSearch] = useState("");
   const [brand, setBrand] = useState(company || "All");
 
   const brands = ["All", "Luminous", "Microtek", "Livguard", "Eastman"];
+
+  // 🔥 Fetch products from backend
+  useEffect(() => {
+    fetch("http://localhost:5000/api/products")
+      .then(res => res.json())
+      .then(data => setProducts(data))
+      .catch(err => console.log("Error fetching products:", err));
+  }, []);
 
   // URL change hone par brand update
   useEffect(() => {
@@ -64,7 +72,7 @@ export default function Products() {
                       grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         
         {filteredProducts.map((item) => (
-          <ProductCard key={item.id} product={item} />
+          <ProductCard key={item._id} product={item} />
         ))}
 
         {filteredProducts.length === 0 && (
