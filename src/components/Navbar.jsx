@@ -25,9 +25,16 @@ export default function Navbar() {
     <div className="bg-[#1e293b] text-white sticky top-0 z-50">
       <div className="flex items-center justify-between px-6 py-4">
 
-        {/* Logo */}
-        <Link to="/" className="text-2xl font-bold text-[#36BDEF]">
-          PANKAJ ELECTRICALS
+        {/* ✅ Logo + Text */}
+        <Link to="/" className="flex items-center gap-3 ml-[-30px]">
+         <img 
+  src="/kkkkkk.png"
+  alt="Pankaj Electricals"
+  className="h-8 w-auto scale-450 origin-left"
+ />
+          <span className="ml-12 text-2xl font-bold text-[#FFD34D]">
+            PANKAJ ELECTRICALS
+          </span>
         </Link>
 
         {/* Search Bar */}
