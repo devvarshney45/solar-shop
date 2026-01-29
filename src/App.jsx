@@ -7,15 +7,20 @@ import Signup from "./pages/Signup";
 import Checkout from "./pages/Checkout";
 import Admin from "./pages/Admin";
 import ProtectedAdmin from "./components/ProtectedAdmin";
-import { GoogleOAuthProvider } from "@react-oauth/google";
 import MyOrders from "./pages/MyOrders";
+
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import ScrollToTop from "./components/ScrollToTop";  // ✅ added
 
 export default function App() {
   return (
-    <GoogleOAuthProvider clientId="import.meta.env.VITE_GOOGLE_CLIENT">
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT}>
       <BrowserRouter>
-        <Routes>
+        
+        {/* Always scroll page to top on route change */}
+        <ScrollToTop />
 
+        <Routes>
           {/* Public Pages */}
           <Route path="/" element={<Home />} />
 
@@ -26,11 +31,9 @@ export default function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/my-orders" element={<MyOrders />} />
 
-
           {/* Auth Pages */}
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-
 
           {/* Protected Admin Page */}
           <Route
@@ -41,7 +44,6 @@ export default function App() {
               </ProtectedAdmin>
             }
           />
-
         </Routes>
       </BrowserRouter>
     </GoogleOAuthProvider>
