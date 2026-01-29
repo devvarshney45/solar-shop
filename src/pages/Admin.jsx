@@ -21,7 +21,7 @@ export default function Admin() {
 
   // ---------------- FETCH PRODUCTS ----------------
   async function fetchProducts() {
-    const res = await fetch("http://localhost:5000/api/products");
+    const res = await fetch("https://solar-shop-85m7.onrender.com/api/products");
     const data = await res.json();
     setProducts(data);
   }
@@ -30,7 +30,7 @@ export default function Admin() {
   async function fetchOrders() {
     const token = getToken();
 
-    const res = await fetch("http://localhost:5000/api/orders", {
+    const res = await fetch("https://solar-shop-85m7.onrender.com/api/orders", {
       headers: {
         Authorization: "Bearer " + token
       }
@@ -58,8 +58,8 @@ export default function Admin() {
     const token = getToken();
 
     const url = editId
-      ? `http://localhost:5000/api/products/${editId}`
-      : "http://localhost:5000/api/products";
+      ? `https://solar-shop-85m7.onrender.com/api/products/${editId}`
+      : "https://solar-shop-85m7.onrender.com/api/products";
 
     const method = editId ? "PUT" : "POST";
 
@@ -89,7 +89,7 @@ export default function Admin() {
   async function handleDelete(id) {
     const token = getToken();
 
-    const res = await fetch(`http://localhost:5000/api/products/${id}`, {
+    const res = await fetch(`https://solar-shop-85m7.onrender.com/api/products/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: "Bearer " + token
@@ -120,7 +120,7 @@ export default function Admin() {
     const token = getToken();
 
     const res = await fetch(`
-      http://localhost:5000/api/orders/${orderId}/status`,
+      https://solar-shop-85m7.onrender.com/api/orders/${orderId}/status`,
       {
         method: "PUT",
         headers: {

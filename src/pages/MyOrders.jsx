@@ -7,7 +7,7 @@ export default function MyOrders() {
     async function fetchOrders() {
       const token = localStorage.getItem("token");
 
-      const res = await fetch("http://localhost:5000/api/orders/my", {
+      const res = await fetch("https://solar-shop-85m7.onrender.com/api/orders/my", {
         headers: {
           "Authorization": "Bearer " + token
         }

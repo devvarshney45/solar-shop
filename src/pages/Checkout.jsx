@@ -16,7 +16,7 @@ export default function Checkout() {
   async function placeOrder() {
     const token = localStorage.getItem("token");
 
-    const res = await fetch("http://localhost:5000/api/orders", {
+    const res = await fetch("https://solar-shop-85m7.onrender.com/api/orders", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

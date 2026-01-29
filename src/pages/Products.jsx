@@ -14,7 +14,7 @@ const brands = ["All", "LUMINOUS", "MICROTEK", "LIVGUARD", "EASTMAN"];
 
   // 🔥 Fetch all products once
   useEffect(() => {
-    fetch("http://localhost:5000/api/products")
+    fetch("https://solar-shop-85m7.onrender.com/api/products")
       .then(res => res.json())
       .then(data => setProducts(data))
       .catch(err => console.log("Error fetching products:", err));

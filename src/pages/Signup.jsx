@@ -16,7 +16,7 @@ export default function Signup() {
   async function handleSubmit(e){
     e.preventDefault();
 
-    const res = await fetch("http://localhost:5000/api/auth/signup",{
+    const res = await fetch("https://solar-shop-85m7.onrender.com/api/auth/signup",{
       method:"POST",
       headers:{ "Content-Type":"application/json" },
       body: JSON.stringify(form)
@@ -34,7 +34,7 @@ export default function Signup() {
 
   // Google Signup/Login
   async function handleGoogleSuccess(response){
-    const res = await fetch("http://localhost:5000/api/auth/google",{
+    const res = await fetch("https://solar-shop-85m7.onrender.com/api/auth/google",{
       method:"POST",
       headers:{ "Content-Type":"application/json" },
       body: JSON.stringify({ token: response.credential })
