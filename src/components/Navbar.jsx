@@ -18,29 +18,29 @@ export default function Navbar() {
       <div className="flex items-center justify-between px-6 py-4">
 
         {/* Logo */}
-        <Link to="/" className="text-2xl font-bold text-[#3b82f6]">
-          Varshney Solar
+        <Link to="/" className="text-2xl font-bold  text-[#36BDEF]">
+          PANKAJ ELECTRICALS
         </Link>
 
         {/* Search */}
         <input
           type="text"
           placeholder="Search products..."
-          className="hidden md:block px-4 py-2 rounded bg-[#0f172a] border border-gray-600"
+          className="hidden md:block px-7 py-2 rounded bg-[#0f172a] ml-auto border border-gray-600"
         />
 
         {/* Icons */}
-        <div className="flex gap-5 items-center">
+        <div className="flex gap-5 items-center text-[#36BDEF]">
 
           {/* Cart */}
-          <Link to="/cart">
-            <FiShoppingCart size={22} />
+          <Link to="/cart" className="flex items-center">
+            <FiShoppingCart size={22} className="align-middle" />
           </Link>
 
           {/* User / Profile */}
           {!user ? (
-            <Link to="/login">
-              <FiUser size={22} />
+            <Link to="/login" className="flex items-center">
+              <FiUser size={22} className="align-middle" />
             </Link>
           ) : (
             <div className="relative">

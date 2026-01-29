@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import Home from "./pages/Home";
 import Products from "./pages/Products";
 import Cart from "./pages/Cart";
@@ -7,14 +6,13 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Checkout from "./pages/Checkout";
 import Admin from "./pages/Admin";
-
 import ProtectedAdmin from "./components/ProtectedAdmin";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import MyOrders from "./pages/MyOrders";
 
 export default function App() {
   return (
-    <GoogleOAuthProvider clientId="768160812865-hf2cvirtdlgq3vd5e9kad5ud3vu5h5o5.apps.googleusercontent.com">
+    <GoogleOAuthProvider clientId="process.env.VITE_GOOGLE_CLIENT">
       <BrowserRouter>
         <Routes>
 

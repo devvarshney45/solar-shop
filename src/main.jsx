@@ -4,9 +4,14 @@ import App from './App.jsx'
 import { CartProvider } from './context/CartContext.jsx'
 import { AuthProvider } from './context/AuthContext.jsx'
 import { GoogleOAuthProvider } from '@react-oauth/google'
-
+import "aos/dist/aos.css"
+import AOS from "aos"
+AOS.init({
+  duration:200,
+  once:false
+});
 createRoot(document.getElementById('root')).render(
-  <GoogleOAuthProvider clientId="768160812865-hf2cvirtdlgq3vd5e9kad5ud3vu5h5o5.apps.googleusercontent.com">
+  <GoogleOAuthProvider clientId="process.env.VITE_GOOGLE_CLIENT">
     <AuthProvider>
       <CartProvider>
         <App />
