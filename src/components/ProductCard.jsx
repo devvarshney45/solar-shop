@@ -5,7 +5,7 @@ export default function ProductCard({ product }) {
   const { addToCart } = useContext(CartContext);
 
   return (
-    <div data-aos="fade-up" className="bg-[#0f1f33] rounded-xl p-4">
+    <div  className="bg-[#0f1f33] rounded-xl p-4">
       <img src={product.image} className="w-full h-48 object-cover rounded-lg"/>
 
       <h2 className="mt-3 font-semibold">{product.name}</h2>
