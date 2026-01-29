@@ -12,7 +12,7 @@ import MyOrders from "./pages/MyOrders";
 
 export default function App() {
   return (
-    <GoogleOAuthProvider clientId="process.env.VITE_GOOGLE_CLIENT">
+    <GoogleOAuthProvider clientId="import.meta.env.VITE_GOOGLE_CLIENT">
       <BrowserRouter>
         <Routes>
 

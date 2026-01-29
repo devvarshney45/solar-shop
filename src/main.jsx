@@ -11,7 +11,7 @@ AOS.init({
   once:false
 });
 createRoot(document.getElementById('root')).render(
-  <GoogleOAuthProvider clientId="process.env.VITE_GOOGLE_CLIENT">
+  <GoogleOAuthProvider clientId="import.meta.env.VITE_GOOGLE_CLIENT">
     <AuthProvider>
       <CartProvider>
         <App />
